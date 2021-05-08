@@ -1,11 +1,26 @@
 
 <?php
-include "commonHeader.php"; 
+session_start();
+$minimum_range = 0;
+$maximum_range = 1000;
+if(isset($_SESSION['email']))
+{
+    include "commonHeader.php";
+}
+else
+{
+   include "commonheaderwithoutlogin.php";
+
+}
+$connect = mysqli_connect("localhost", "root", "123456789", "shopping") or die ("Please, check the server connection.");
+$brandname=$_GET['name'];
+$_SESSION['brand_range']=$_GET['name'];
+echo $_SESSION['brandcount'];
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="zxx">
+
 
 
 <body>
@@ -36,50 +51,32 @@ include "commonHeader.php";
                         <div class="sidebar__item">
                             <h4>Brand Name</h4>
                             <ul>
+                                 <?php 
+                                 $connect = mysqli_connect("localhost", "root", "123456789", "shopping") or die ("Please, check the server connection.");
+                                $sql="SELECT DISTINCT brand_name FROM products";
+                                $res=mysqli_query($connect, $sql) or die(mysql_error());
+                                while ($row=mysqli_fetch_array($res)) 
+                                {
+                                 ?>                                
+                                <li><a href="brandname.php?name=<?php echo $row['brand_name'];?>"><?php echo $row['brand_name'];?></a></li>
                                
-                                    <?php
-                                    $brand=$_GET['name'];
-                                    $sql1="SELECT * FROM products where brand_name=$brand";
-                                    $res1=mysqli_query($connect, $sql1) or die(mysql_error());
-                                    while ($row1=mysqli_fetch_array($res1)) 
-                                    {
-                                   ?>
+                                 <?php }  ?>
 
-                          <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg=<?php echo $row1['imagename'];?>>
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="favorite.php?name=<?php echo $row1['item_code'];?>"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#"><?php echo $row1['item_name'];?></a></h6>
-                                    <h5><?php echo $row1['price'];?> </h5>
-                                </div>
-                            </div>
-                            
-                           </div>
-                           <?php } ?>
-                       
                             </ul>
                         </div>
                         <div class="sidebar__item">
                             <h4>Price</h4>
                             <div class="price-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="10" data-max="540">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                </div>
-                                <div class="range-slider">
+                                 <div id="price_range" >
+                                        
+
+                                    </div>
+                                <!--<div class="range-slider">
                                     <div class="price-input">
                                         <input type="text" id="minamount" name="minamount">
                                         <input type="text" id="maxamount" name="maxamount">
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                        
@@ -102,14 +99,19 @@ include "commonHeader.php";
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                <div id="rangefind" class="filter__found">
+                                    <h6>Products found</h6>
                                 </div>
                             </div>
                             
                         </div>
                     </div>
-                  
+                    <div id="result" class="row">
+                
+
+                        
+                      
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,5 +150,52 @@ include "commonHeader.php";
 
 
 </body>
+<script>  
+$(document).ready(function(){  
+    
+    $( "#price_range" ).slider({
+        range: true,
+        min: 0,
+        max:5000,
+        values: [ <?php echo $minimum_range; ?>, <?php echo $maximum_range; ?> ],
+        slide:function(event, ui){
+            $("#minimum_range").val(ui.values[0]);
+            $("#maximum_range").val(ui.values[1]);
+            load_product(ui.values[0], ui.values[1]);
+            load_product1(ui.values[0], ui.values[1]);
+
+        }
+    });
+    
+    load_product(<?php echo $minimum_range; ?>, <?php echo $maximum_range; ?>);
+    
+    function load_product(minimum_range, maximum_range)
+    {
+        $.ajax({
+            url:"resfetchbrand.php ",
+            method:"POST",
+            data:{minimum_range:minimum_range, maximum_range:maximum_range},
+            success:function(data)
+            {
+                $('#result').fadeIn('slow').html(data);
+            }
+        });
+    }
+load_product1(<?php echo $minimum_range; ?>,<?php echo $maximum_range; ?>);
+    function load_product1(minimum_range, maximum_range)
+    {
+        $.ajax({
+            url:"resfetchrangebrandcount.php ",
+            method:"POST",
+            data:{minimum_range:minimum_range, maximum_range:maximum_range},
+            success:function(data1)
+            {
+                $('#rangefind').fadeIn('slow').html(data1);
+            }
+        });
+    }
+    
+});  
+</script>
 
 </html>

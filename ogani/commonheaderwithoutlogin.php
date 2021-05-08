@@ -1,22 +1,7 @@
+
 <?php 
 session_start();
-$email=$_SESSION['email'];
 $connect = mysqli_connect("localhost", "root", "123456789", "shopping") or die ("Please, check the server connection.");
-
-$totalquery="SELECT count(*) as total from favorites";
-$count=mysqli_query($connect, $totalquery) or die(mysql_error());
-$data=mysqli_fetch_array($count);
-
-$totalcart="SELECT count(*) as totalcart from cart";
-$countcart=mysqli_query($connect, $totalcart) or die(mysql_error());
-$datacart=mysqli_fetch_array($countcart);
-
-$pricecal="SELECT cart_price from cart where cart_email='$email'";
-$pc=mysqli_query($connect, $pricecal) or die(mysql_error());
-while($row=mysqli_fetch_array($pc))
-{
-    $pricecal_count=$pricecal_count+$row['cart_price'];
-}
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +13,7 @@ while($row=mysqli_fetch_array($pc))
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ecommerce | Template</title>
+    <title>Ogani | Template</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
@@ -61,11 +46,7 @@ while($row=mysqli_fetch_array($pc))
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i><?php   echo $email;?></li>
-                            </ul>
-                        </div>
+                        
                     </div>
                     <div class="col-lg-6">
                         <div class="header__top__right">
@@ -85,7 +66,10 @@ while($row=mysqli_fetch_array($pc))
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="signout.php"><i class="fa fa-user"></i> Logout</a>
+                                <a href="signin.php"><i class="fa fa-user"></i> Login</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="signup.php"><i class="fa fa-user"></i> Signup</a>
                             </div>
                         </div>
                     </div>
@@ -112,10 +96,9 @@ while($row=mysqli_fetch_array($pc))
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="fav_page.php"><i class="fa fa-heart"></i> <span><?php echo $data['total'];?></span></a></li>
-                            <li><a href="shoping-cart.php"><i class="fa fa-shopping-bag"></i> <span><?php echo $datacart['totalcart'];?></span></a></li>
+                            <li><a href=""><i class="fa fa-heart"></i> <span></span></a></li>
+                            <li><a href=""><i class="fa fa-shopping-bag"></i> <span></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span><?php echo $pricecal_count;?></span></div>
                     </div>
                 </div>
             </div>

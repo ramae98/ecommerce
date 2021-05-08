@@ -1,7 +1,15 @@
 
 <?php
 session_start();
-include "commonHeader.php";
+if(isset($_SESSION['email']))
+{
+    include "commonHeader.php";
+}
+else
+{
+   include "commonheaderwithoutlogin.php";
+
+}
 $minimum_range = 0;
 $maximum_range = 1000;
 ?>
@@ -21,7 +29,7 @@ $maximum_range = 1000;
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Organi Shop</h2>
+                        <h2>E-Commerce</h2>
                         
                     </div>
                 </div>
@@ -59,7 +67,7 @@ $maximum_range = 1000;
                                 <div id="price_range" >
                                         
 
-                                    </div>
+                                </div>
                               <!--  <div class="range-slider">
                                     <div id="price_range" class="price-input">
                                         <input type="text" id="minimum_range" name="min">
@@ -104,7 +112,7 @@ $maximum_range = 1000;
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span><?php echo $row['item_name'];?></span>
-                                            <h5><a href="#"><?php echo $row['item_code'];?></a></h5>
+                                            <h5><a href="shop-details.php?name=<?php echo $row['item_code'];?>"><?php echo $row['item_code'];?></a></h5>
                                             <div class="product__item__price"><?php echo $row['price'];?></div>
                                         </div>
                                     </div>
@@ -129,41 +137,14 @@ $maximum_range = 1000;
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                <div id="rangefind" class="filter__found">
                                 </div>
                             </div>
                             
                         </div>
                     </div>
                     <div id="result"class="row">
-            <!-- <?php
-                       
-                        $sql="SELECT * FROM products";
-                        $res=mysqli_query($connect, $sql) or die(mysql_error());
-                        while ($row=mysqli_fetch_array($res)) 
-                        {
-                       ?>
-
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg=<?php echo $row['imagename'];?>>
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="favorite.php?name=<?php echo $row['item_code'];?>"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#"><?php echo $row['item_name'];?></a></h6>
-                                    <h5><?php echo $row['price'];?> </h5>
-                                </div>
-                            </div>
-                        </div>
-
-                       <?php } ?>
-
-                    -->    
+             
                       
                     </div>
                 </div>
@@ -214,6 +195,8 @@ $(document).ready(function(){
             $("#minimum_range").val(ui.values[0]);
             $("#maximum_range").val(ui.values[1]);
             load_product(ui.values[0], ui.values[1]);
+            load_product1(ui.values[0], ui.values[1]);
+
         }
     });
     
@@ -231,6 +214,21 @@ $(document).ready(function(){
             }
         });
     }
+
+    load_product1(<?php echo $minimum_range; ?>,<?php echo $maximum_range; ?>);
+    function load_product1(minimum_range, maximum_range)
+    {
+        $.ajax({
+            url:"resfetchcount.php ",
+            method:"POST",
+            data:{minimum_range:minimum_range, maximum_range:maximum_range},
+            success:function(data1)
+            {
+                $('#rangefind').fadeIn('slow').html(data1);
+            }
+        });
+    }
+    
     
 });  
 </script>

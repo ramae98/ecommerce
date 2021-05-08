@@ -1,6 +1,16 @@
 <?php
 session_start();
-include "commonHeader.php";
+$email=$_SESSION['email'];
+echo $email;
+if(isset($_SESSION['email']))
+{
+    include "commonHeader.php";
+}
+else
+{
+   include "commonheaderwithoutlogin.php";
+
+}
 ?>
 
 
@@ -8,7 +18,20 @@ include "commonHeader.php";
 <html>
 <body>
     <!-- Page Preloder -->
-    
+     <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>E-Commerce</h2>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
     <!-- Hero Section End -->
 
     <!-- Categories Section Begin -->
@@ -27,7 +50,7 @@ include "commonHeader.php";
                     <div class="col-lg-3">
                        
                         <div class="categories__item set-bg" data-setbg=<?php echo $row['imagename'];?>>
-                            <h5><a href="#"><?php echo $row['item_code'];?></a></h5>
+                            <h5><a href="shop-details.php?name=<?php echo $row['item_code'];?>"><?php echo $row['item_code'];?></a></h5>
                         </div>
                       
                     </div>

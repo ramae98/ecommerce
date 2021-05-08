@@ -1,15 +1,12 @@
 <?php 
 session_start();
-$email=$_SESSION['email'];
-
-if($email='')
+if(isset($_SESSION['email']))
 {
-   include "commonheaderwithoutlogin.php";
- 
+    include "commonHeader.php";
 }
 else
 {
-    include "commonHeader.php";
+   include "commonheaderwithoutlogin.php";
 
 }
  ?>
@@ -19,43 +16,22 @@ else
 <html lang="zxx">
 
 <body>
-    <!-- Page Preloder -->
-  
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Favourites</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.php">Home</a>
-                            <span>Favourites</span>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
 
+    <!-- Hero Section End -->
+
+  
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
             <div class="row">
                  <?php
+                       $search=$_GET['search'];
                        $connect = mysqli_connect("localhost", "root", "123456789", "shopping") or die ("Please, check the server connection.");
-                        $sql="SELECT * FROM favorites";
+                        $sql="SELECT * FROM products where brand_name LIKE '%".$search."%' ";
                         $res=mysqli_query($connect, $sql) or die(mysql_error());
                       //  echo $sql;
-                        while ($row=mysqli_fetch_array($res)) 
-                        {
-                          $z=$row['item_code'];
-                          $sql1="SELECT * FROM products where item_code='$z'";
-                          $res1=mysqli_query($connect, $sql1) or die(mysql_error());
-
-                          while($row1=mysqli_fetch_array($res1))
+                        
+                          while($row1=mysqli_fetch_array($res))
                           {
                            ?>
                 <div class="col-lg-6 col-md-6">
@@ -80,23 +56,17 @@ else
                         </div>
                         <div class="product__details__price">$50.00</div>
                         <p><?php echo $row1['description'];?></p>
-                        
-                        <a href="cart.php?name=<?php echo $row['item_code'];?>" class="primary-btn">ADD TO CART</a>
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="primary-btn">ADD TO CARD</a>
                         <a href="fav_page.php" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
-                            
-                            <?php  
-                            if($row1['quantity'] >0)
-                            {
-                                $stock="In Stock";
-                            }
-                            else
-                            {
-                                $stock="Out of Stock";
-                            }
-                             ?>
-
-                            <li><b>Availability</b> <span><?php echo $stock;?></span></li>
+                            <li><b>Availability</b> <span>In Stock</span></li>
                            
                             <li><b>Share on</b>
 
@@ -121,7 +91,7 @@ else
                         </ul>
                     </div>
                 </div>
-                  <?php } }?>  
+                  <?php }?>  
             </div>
         </div>
     </section>
