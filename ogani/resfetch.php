@@ -12,7 +12,7 @@ $res=mysqli_query($connect, $sql) or die(mysql_error());
                                     <ul class="product__item__pic__hover">
                                         <li><a href="favorite.php?name='.$row['item_code'].'"><i class="fa fa-heart"></i></a></li>
                                         
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="cart.php?name='.$row['item_code'].'"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

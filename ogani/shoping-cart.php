@@ -88,8 +88,9 @@ else
                                     <td class="shoping__cart__total">
                                      <?php echo $itemtotal;?>
                                     </td>
+                                   
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                       <a href="deleteoneitemcart.php?name=<?php echo $firstrow['cart_itemcode'];?>" class="icon_close"></a>
                                     </td>
                                 </tr>
                                 <?php }  
@@ -102,9 +103,14 @@ else
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                        <?php 
+                        $cart="SELECT * FROM CART";
+                        $cartres=mysqli_query($connect,$cart);
+                         
+                        ?>
+                        <a href="index.php" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        <a href="deletecart.php" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                            Empty Cart</a>
                     </div>
                 </div>
               <div>
@@ -116,7 +122,7 @@ else
                             
                             <li>Total <span><?php echo $pricecal_count; ?></span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="checkout.php" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
@@ -128,39 +134,7 @@ else
     <footer class="footer spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
+                               
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
                         <h6>Join Our Newsletter Now</h6>

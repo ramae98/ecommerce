@@ -45,6 +45,6 @@ $connect = mysqli_connect("localhost", "root", "123456789", "shopping") or die (
  }
  
  }
-header("Location:shop-grid.php");
+header("Location:shoping-cart.php");
 
 ?>

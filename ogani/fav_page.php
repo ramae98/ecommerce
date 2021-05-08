@@ -55,8 +55,14 @@ else
                           $sql1="SELECT * FROM products where item_code='$z'";
                           $res1=mysqli_query($connect, $sql1) or die(mysql_error());
 
+                            
+
                           while($row1=mysqli_fetch_array($res1))
                           {
+
+                            $sql2="SELECT * FROM productfeatures where item_code='$z'";
+                            $res2=mysqli_query($connect, $sql2) or die(mysql_error());
+                            $row2=mysqli_fetch_array($res2)
                            ?>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
@@ -78,14 +84,20 @@ else
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">$50.00</div>
-                        <p><?php echo $row1['description'];?></p>
-                        
+
+                        <div class="product__details__price"><?php echo $row1['price'];?></div>
+                        <p><?php echo $row1['description'];?></br>
+                        <?php echo $row2['feature1'];?></br>
+                        <?php echo $row2['feature2'];?></br>
+                        <?php echo $row2['feature3'];?></br>
+                        <?php echo $row2['feature4'];?></br>
+                        <?php echo $row2['feature5'];?></br>
+                         <?php echo $row2['feature6'];?></p>
                         <a href="cart.php?name=<?php echo $row['item_code'];?>" class="primary-btn">ADD TO CART</a>
-                        <a href="fav_page.php" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                        <ul>
-                            
-                            <?php  
+                        
+                        <a href="deletefav.php?name=<?php echo $row['item_code'];  ?>"  class="icon_close"></a>
+                                                <ul>
+                           <?php  
                             if($row1['quantity'] >0)
                             {
                                 $stock="In Stock";
@@ -112,7 +124,7 @@ else
 
 
                                 <div class="share">
-                                    <a onClick="window.open('http://www.facebook.com/sharer.php?s=100&  amp;p[title]=<?php  echo $title;?>&amp;p[summary]=<?php echo $summary;?>&amp;p[url]=<?php echo $url; ?>&amp;p[images][0]=<?php echo $image;?>','sharer','toolbar=0,status=0,width=548,height=325');" href="javascript: void(0)"><i class="fa fa-facebook"></i></a>
+                                    <a href="http://www.facebook.com/share.php?u=<shop-grid.php\>" onclick="return fbs_click()" target="_blank"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                     <a href="#"><i class="fa fa-pinterest"></i></a>
@@ -126,13 +138,18 @@ else
         </div>
     </section>
     <!-- Product Details Section End -->
+                    
 
     <!-- Related Product Section Begin -->
 
     <!-- Related Product Section End -->
 
     <!-- Footer Section End -->
-
+<script>function fbs_click() 
+{u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');
+return false;
+}
+</script>
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -147,3 +164,5 @@ else
 </body>
 
 </html>
+
+
