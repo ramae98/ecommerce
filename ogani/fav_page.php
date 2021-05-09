@@ -22,7 +22,7 @@ else
     <!-- Page Preloder -->
   
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="images/banner-1.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -95,7 +95,7 @@ else
                          <?php echo $row2['feature6'];?></p>
                         <a href="cart.php?name=<?php echo $row['item_code'];?>" class="primary-btn">ADD TO CART</a>
                         
-                        <a href="deletefav.php?name=<?php echo $row['item_code'];  ?>"  class="icon_close"></a>
+                        <a href="deletefav.php?name=<?php echo $row['item_code'];  ?>"  class="primary-btn">Remove</a>
                                                 <ul>
                            <?php  
                             if($row1['quantity'] >0)

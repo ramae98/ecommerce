@@ -15,12 +15,12 @@ $res5=mysqli_query($connect, $sql5) or die(mysql_error());
                                 <div class="product__item__pic set-bg" data-setbg='.$row5['imagename'].'  style="background-image: url('.$row5['imagename'].');">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="favorite.php?name='.$row5['item_code'].'"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        
+                                        <li><a href="cart.php?name='.$row5['item_code'].'"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">'.$row5['item_name'].'</a></h6>
+                                    <h6><a href="shop-details.php?name='.$row5['item_code'].'">'.$row5['item_name'].'</a></h6>
                                     <h5>'.$row5['price'].'</h5>
                                 </div>
                             </div>

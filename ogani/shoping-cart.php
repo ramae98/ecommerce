@@ -21,7 +21,7 @@ else
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="images/banner-1.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -73,24 +73,36 @@ else
                                 <tr>
                                     <td class="shoping__cart__item">
                                         <img src="<?php echo $secondrow['imagename'];?>" alt="">
-                                        <h5><?php echo $firstrow['cart_item_name'];?></h5>
+                                        <h5><a href="shop-details.php?name=<?php echo $firstrow['cart_itemcode'];?>"><?php echo $firstrow['cart_item_name'];?></h5>
                                     </td>
                                     <td class="shoping__cart__price">
                                         <?php echo $secondrow['price'];?>
                                     </td>
                                     <td class="shoping__cart__quantity">
+                                      <form action="updatecartqty.php">
+
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" id="quant" value=<?php echo $firstrow['cart_quantity'];?>>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
+                                                <input type="text" name="qty" id="quant" value=<?php echo $firstrow['cart_quantity'];?>>
+
+                                                 </div>
+                                                <input type="hidden"  name="code" value=<?php echo $firstrow['cart_itemcode'];?>>
+
+                                                <button type="submit" ><span><i class="fa fa-edit" style="font-size:27px;color:green"></i></span></button>
+
+
+
+                                       
+                                     </div>
+                                   </form>
+                                 </td>
+
+                              <td class="shoping__cart__total">
                                      <?php echo $itemtotal;?>
                                     </td>
                                    
                                     <td class="shoping__cart__item__close">
-                                       <a href="deleteoneitemcart.php?name=<?php echo $firstrow['cart_itemcode'];?>" class="icon_close"></a>
+                                       <a href="deleteoneitemcart.php?name=<?php echo $firstrow['cart_itemcode'];?>" class="primary-btn">Remove</a>
                                     </td>
                                 </tr>
                                 <?php }  
@@ -122,7 +134,7 @@ else
                             
                             <li>Total <span><?php echo $pricecal_count; ?></span></li>
                         </ul>
-                        <a href="checkout.php" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="totalcheckout.php" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
@@ -133,25 +145,7 @@ else
     <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
-            <div class="row">
-                               
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer__copyright">
@@ -164,8 +158,10 @@ else
             </div>
         </div>
     </footer>
-    <!-- Footer Section End -->
 
+
+
+ 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

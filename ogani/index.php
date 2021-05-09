@@ -19,7 +19,7 @@ else
 <body>
     <!-- Page Preloder -->
      <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="images/banner-1.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -31,6 +31,7 @@ else
             </div>
         </div>
     </section>
+    <br><br>
     <!-- Breadcrumb Section End -->
     <!-- Hero Section End -->
 
@@ -50,9 +51,11 @@ else
                     <div class="col-lg-3">
                        
                         <div class="categories__item set-bg" data-setbg=<?php echo $row['imagename'];?>>
-                            <h5><a href="shop-details.php?name=<?php echo $row['item_code'];?>"><?php echo $row['item_code'];?></a></h5>
+
                         </div>
-                      
+                        <div class="categories__item set-bg">
+                        <h5><a href="shop-details.php?name=<?php echo $row['item_code'];?>"><?php  echo $row['item_code'];?></a></h5>
+                        </div>
                     </div>
                    <?php } ?>
                 </div>
@@ -60,7 +63,8 @@ else
             </div>
         </div>
     </section>
-    <!-- Categories Section End -->
+</br>
+</br>    <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->
     
@@ -70,14 +74,14 @@ else
     <div class="banner">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+               <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="img/banner/banner-1.jpg" alt="">
+                        <img src="images/banner-3.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="img/banner/banner-2.jpg" alt="">
+                        <img src="images/banner-2.jpg" alt="">
                     </div>
                 </div>
             </div>

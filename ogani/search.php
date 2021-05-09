@@ -27,7 +27,7 @@ else
                  <?php
                        $search=$_GET['search'];
                        $connect = mysqli_connect("localhost", "root", "123456789", "shopping") or die ("Please, check the server connection.");
-                        $sql="SELECT * FROM products where brand_name LIKE '%".$search."%' ";
+                        $sql="SELECT * FROM products where brand_name LIKE '%".$search."%'AND item_name LIKE '%".$search."%'";
                         $res=mysqli_query($connect, $sql) or die(mysql_error());
                       //  echo $sql;
                         

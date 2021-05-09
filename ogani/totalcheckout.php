@@ -22,7 +22,7 @@ else
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="images/banner-1.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -60,8 +60,7 @@ else
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p> Name<span><?php echo $row['complete_name'];?></span></p>
-                                        <p><span><?php echo $row['complete_name'];?></span></p>
+                                        <p>Enter Name<span>*</span></p>
                                         <input type="text" value=<?php echo $row['complete_name'];?>>
                                     </div>
                                 </div>
@@ -122,8 +121,9 @@ else
                                 <input type="text"
                                     placeholder="Notes about your order, e.g. special notes for delivery.">
                             </div>
-                            Do you want to Edit your details:<a href="editchekout.php">click here</a>
+                             Do you want to Edit your details:<a href="editchekout.php">click here</a>
                         </div>
+
                         <div class="col-lg-4 col-md-6">
                            
                             <div class="checkout__order">
@@ -134,17 +134,19 @@ else
                                     $itemcode=$_GET['name'];
                                     $connect = mysqli_connect("localhost", "root", "123456789", "shopping") or die ("Please, check the server connection.");
 
-                                    $cartsql="SELECT * FROM products where item_code='$itemcode' ";
+                                    $cartsql="SELECT * FROM cart where cart_email='$e_mail' ";
                                     $cartres=mysqli_query($connect,$cartsql);
+                                    $total=0;
                                     while($cartrow=mysqli_fetch_array($cartres))
-                                    {                              
+                                    {    
+                                    $total=$total+$cartrow['cart_price'];                          
                                     ?>
                                 <ul>
 
-                                    <li><?php echo $cartrow['item_code'];?><span><?php echo $cartrow['price'];?></span></li>
+                                    <li><?php echo $cartrow['cart_itemcode'];?><span><?php echo $cartrow['cart_price'];?></span></li>
                                 </ul>
                             <?php } ?>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                <div class="checkout__order__total">Total <span><?php echo $total;?></span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
